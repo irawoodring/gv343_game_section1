@@ -10,7 +10,7 @@ class Game {
 	public:
 		Game();
 		int start();
-		int run();
+		void run();
 	private:
 		sf::RenderWindow window;
 		void processEvents();

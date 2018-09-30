@@ -86,6 +86,8 @@ int Game::start(){
 		{
 			if (event.type == sf::Event::Closed){
 				window.close();
+				sound.stop();
+				exit(0);
 			}
 
 			if(event.type == sf::Event::KeyPressed){
@@ -121,25 +123,26 @@ int Game::start(){
  * is complete.
  */
 
-int Game::run()
+void Game::run()
 {
+	player.setHealth(STARTING_HEALTH);
+	done = false;
 	sf::SoundBuffer buffer;
 	if(!buffer.loadFromFile("music/in_game.wav")){
 		std::cerr << "Unable to load in_game music file." << std::endl;
-		return EXIT_FAILURE;
 	}
 
 	sf::Sound sound;
 	sound.setBuffer(buffer);
 	sound.play();
 
-	while (window.isOpen())
+	while (!done)
 	{
 		processEvents();
 		update();
 		render();
 	}
-	return EXIT_SUCCESS;
+	sound.stop();
 }
 
 /* 
@@ -152,10 +155,6 @@ void Game::processEvents()
 	sf::Event event;
 	while (window.pollEvent(event))
 	{
-		if(done){
-			window.close();
-			break;
-		}
 		switch (event.type)
 		{
 			case sf::Event::Closed:

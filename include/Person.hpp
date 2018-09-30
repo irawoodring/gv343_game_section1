@@ -7,6 +7,7 @@ class Person {
 	public:
 		Person();
 		int getHealth();
+		void setHealth(int health);
 		sf::Sprite getSprite();
 		void harm(int hp);
 		void updatePosition(int x, int y);

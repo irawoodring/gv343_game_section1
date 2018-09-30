@@ -1,5 +1,6 @@
 #include "Person.hpp"
 #include "SFML/Graphics.hpp"
+#include "Settings.hpp"
 #include <iostream>
 
 Person::Person(){
@@ -9,9 +10,9 @@ Person::Person(){
 	sprite.setTexture(texture);
 	sf::FloatRect spriteSize = sprite.getGlobalBounds();
 	sprite.setOrigin(spriteSize.width/2.0, spriteSize.height/2.0);
-	x = 400;
-	y = 300;
-	health = 1000;
+	x = WIDTH / 2;
+	y = HEIGHT / 2;
+	health = STARTING_HEALTH;
 	sprite.setPosition(x, y);
 }
 
@@ -23,11 +24,15 @@ int Person::getHealth(){
 	return this->health;
 }
 
+void Person::setHealth(int health){
+	this->health = health;
+}
+
 void Person::updatePosition(int dx, int dy){
-	if( (x+dx) > 0 && (x+dx) < 800 ){
+	if( (x+dx) > 0 && (x+dx) < WIDTH ){
 		x = x + dx;
 	}
-	if ( (y+dy) > 0 && (y+dy) < 600 ){
+	if ( (y+dy) > 0 && (y+dy) < HEIGHT ){
 		y = y + dy;
 	}
 	sprite.setPosition(x,y);

@@ -3,6 +3,8 @@
 
 int main(int argc, char** argv){
 	Game g;
-	g.start();
-	g.run();
+	while(true){
+		g.start();
+		g.run();
+	}
 }
