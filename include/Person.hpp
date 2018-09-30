@@ -8,7 +8,7 @@ class Person {
 		Person();
 		int getHealth();
 		sf::Sprite getSprite();
-		void harm();
+		void harm(int hp);
 		void updatePosition(int x, int y);
 		
 	private:
