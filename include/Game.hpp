@@ -19,9 +19,12 @@ class Game {
 
 		std::vector<Monster> monsters;
 		Person player;
-		int x;
-		int y;
 		bool done;
+		int score;
+		sf::Text scoreLabel;
+		sf::Text playerHealth;	
+        	sf::Font font;
+		
 };
 
 #endif
