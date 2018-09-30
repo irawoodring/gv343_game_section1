@@ -2,6 +2,7 @@
 #define		__H_PERSON__
 
 #include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp"
 
 class Person {
 	public:
@@ -18,6 +19,8 @@ class Person {
 		int x;
 		int y;
 		int health;
+		sf::SoundBuffer punchBuffer;
+		sf::Sound punch;
 };
 
 #endif

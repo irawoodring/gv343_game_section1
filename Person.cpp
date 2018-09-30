@@ -14,6 +14,10 @@ Person::Person(){
 	y = HEIGHT / 2;
 	health = STARTING_HEALTH;
 	sprite.setPosition(x, y);
+	if(punchBuffer.loadFromFile("sounds/punch.wav")){
+		std::cerr << "Can't load punch sound." << std::endl;
+	}
+	punch.setBuffer(punchBuffer);
 }
 
 sf::Sprite Person::getSprite(){
@@ -40,4 +44,5 @@ void Person::updatePosition(int dx, int dy){
 
 void Person::harm(int hp){
 	health = health - hp;
+	punch.play();
 }

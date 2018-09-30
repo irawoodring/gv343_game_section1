@@ -30,7 +30,7 @@ Game::Game(){
 	// Add monsters to the game via a vector of Monsters.
 	monsters.push_back(Monster());
 	// The "standard" game font is loaded here.
-        if(!font.loadFromFile("fonts/Notable-Regular.ttf")){
+	if(!font.loadFromFile("fonts/Notable-Regular.ttf")){
 		std::cerr << "We should be throwing exceptions here... font can't load." << std::endl;
 	}
 }
@@ -134,6 +134,7 @@ void Game::run()
 
 	sf::Sound sound;
 	sound.setBuffer(buffer);
+	sound.setVolume(50);
 	sound.play();
 
 	while (!done)
@@ -159,7 +160,7 @@ void Game::processEvents()
 		{
 			case sf::Event::Closed:
 				window.close();
-				break;
+				exit(0);
 
 			case sf::Event::KeyPressed:
 				switch(event.key.code){
@@ -220,11 +221,11 @@ void Game::render()
 	sf::RectangleShape border(sf::Vector2f(WIDTH, 20));
 	border.setPosition(sf::Vector2f(0,HEIGHT));
 	window.draw(border);
-        scoreLabel.setFont(font);
-        scoreLabel.setString("Score: " + std::to_string(score));
-        scoreLabel.setCharacterSize(24);
-        scoreLabel.setFillColor(sf::Color::White);
-        scoreLabel.setPosition(50, HEIGHT + 40);
+	scoreLabel.setFont(font);
+	scoreLabel.setString("Score: " + std::to_string(score));
+	scoreLabel.setCharacterSize(24);
+	scoreLabel.setFillColor(sf::Color::White);
+	scoreLabel.setPosition(50, HEIGHT + 40);
 	playerHealth.setFont(font);
 	playerHealth.setCharacterSize(24);
 	playerHealth.setString("Health " + std::to_string(player.getHealth()));
@@ -232,6 +233,6 @@ void Game::render()
 	playerHealth.setPosition(300, HEIGHT + 40);
 	window.draw(scoreLabel);
 	window.draw(playerHealth);
-	
+
 	window.display();
 }
