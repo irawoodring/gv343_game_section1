@@ -1,5 +1,8 @@
 #include <iostream>
 #include <string>
+#include <random>
+#include "SFML/Audio.hpp"
+#include "Options.h"
 
 /**
  * This class handles the options 
@@ -14,10 +17,13 @@
 
 /** Global variables */
 
-
 /**
  * Main method
  */
 int main (int argc, char** argv) {
+
+}
+
+Options::Options() {
 
 }
