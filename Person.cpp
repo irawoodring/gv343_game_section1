@@ -10,14 +10,18 @@ Person::Person(){
 	sprite.setTexture(texture);
 	sf::FloatRect spriteSize = sprite.getGlobalBounds();
 	sprite.setOrigin(spriteSize.width/2.0, spriteSize.height/2.0);
+	if(!punchBuffer.loadFromFile("sounds/punch.wav")){
+		std::cerr << "Can't load punch sound." << std::endl;
+	}
+	punch.setBuffer(punchBuffer);
+	initialize();
+}
+
+void Person::initialize(){
 	x = WIDTH / 2;
 	y = HEIGHT / 2;
 	health = STARTING_HEALTH;
 	sprite.setPosition(x, y);
-	if(punchBuffer.loadFromFile("sounds/punch.wav")){
-		std::cerr << "Can't load punch sound." << std::endl;
-	}
-	punch.setBuffer(punchBuffer);
 }
 
 sf::Sprite Person::getSprite(){

@@ -45,7 +45,7 @@ int Game::start(){
 	window.clear();
 	sf::Texture splash;
 	if(!splash.loadFromFile("./images/neighborhood.png")){
-		return EXIT_FAILURE;
+		std::cerr << "Can't load start image." << std::endl;
 	}
 	sf::Sprite sprite;
 	sprite.setTexture(splash);
@@ -71,14 +71,12 @@ int Game::start(){
 
 	sf::Clock clock;
 
-	sf::SoundBuffer buffer;
-	if(!buffer.loadFromFile("music/epic_hero.wav")){
+	sf::Music music;
+	if(!music.openFromFile("music/epic_hero.wav")){
 		return EXIT_FAILURE;
 	}
 
-	sf::Sound sound;
-	sound.setBuffer(buffer);
-	sound.play();
+	music.play();
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -86,13 +84,14 @@ int Game::start(){
 		{
 			if (event.type == sf::Event::Closed){
 				window.close();
-				sound.stop();
+				music.stop();
 				exit(0);
 			}
 
 			if(event.type == sf::Event::KeyPressed){
 				if(event.key.code == sf::Keyboard::Return){
 					window.clear();
+					music.stop();
 					return 0;
 				}
 			}
@@ -125,17 +124,16 @@ int Game::start(){
 
 void Game::run()
 {
-	player.setHealth(STARTING_HEALTH);
+	player.initialize();
 	done = false;
-	sf::SoundBuffer buffer;
-	if(!buffer.loadFromFile("music/in_game.wav")){
+	sf::Music music;
+	if(!music.openFromFile("music/in_game.wav")){
 		std::cerr << "Unable to load in_game music file." << std::endl;
 	}
 
-	sf::Sound sound;
-	sound.setBuffer(buffer);
-	sound.setVolume(50);
-	sound.play();
+	music.setVolume(50);
+	music.setLoop(true);
+	music.play();
 
 	while (!done)
 	{
@@ -143,7 +141,7 @@ void Game::run()
 		update();
 		render();
 	}
-	sound.stop();
+	music.stop();
 }
 
 /* 
