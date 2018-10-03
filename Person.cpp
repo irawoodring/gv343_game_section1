@@ -52,7 +52,7 @@ void Person::render(sf::RenderTarget& window) {
         currentFrame++;
 		animationClock.restart();
     }
-    
+
     if (running) {
         if (currentFrame >= runAnim.size()) {
             currentFrame = 0;
@@ -72,6 +72,11 @@ void Person::render(sf::RenderTarget& window) {
     } else {
         rect.left = rect.width * idleAnim[currentFrame];
     }
+
+	if (facing == PlayerDirection::West) {
+        rect.left += rect.width;
+		rect.width = -rect.width;
+	}
 
     sprite.setTextureRect(rect);
 
@@ -94,10 +99,12 @@ void Person::update() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		x -= speed * delta;
         running = true;
+        facing = PlayerDirection::West;
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 		x += speed * delta;
         running = true;
+        facing = PlayerDirection::East;
 	}
 
 	sprite.setPosition(x, y);

@@ -4,6 +4,11 @@
 #include "SFML/Graphics.hpp"
 #include "SFML/Audio.hpp"
 
+enum PlayerDirection {
+	East,
+	West,
+};
+
 class Person {
 	public:
 		Person();
@@ -49,6 +54,8 @@ class Person {
         sf::IntRect playerFrameSize = sf::IntRect(0, 0, 16, 32);
 
         unsigned int currentFrame = 0;
+
+		PlayerDirection facing = PlayerDirection::East;
 
         std::array<unsigned, 3> idleAnim = { 0, 1, 2 };
         std::array<unsigned, 6> runAnim = { 3, 4, 5, 6, 7, 8 };
