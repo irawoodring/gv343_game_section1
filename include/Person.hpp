@@ -51,13 +51,19 @@ class Person {
         // Used to animate the player over time
         sf::Clock animationClock;
 
+		// The frame size of each player sprite in the bigger texture
         sf::IntRect playerFrameSize = sf::IntRect(0, 0, 16, 32);
 
+		// Which animation frame we are currently on
         unsigned int currentFrame = 0;
 
+		// Which direction the player is currently facing
 		PlayerDirection facing = PlayerDirection::East;
 
+		// The frames to cycle during the idle animation
         std::array<unsigned, 3> idleAnim = { 0, 1, 2 };
+
+		// The frames to cycle during the run animation
         std::array<unsigned, 6> runAnim = { 3, 4, 5, 6, 7, 8 };
 };
 
