@@ -21,6 +21,7 @@ void Person::initialize(){
 	x = WIDTH / 2;
 	y = HEIGHT / 2;
 	health = STARTING_HEALTH;
+    speed = STARTING_SPEED;
 	sprite.setPosition(x, y);
 }
 
@@ -37,16 +38,42 @@ void Person::setHealth(int health){
 }
 
 void Person::updatePosition(int dx, int dy){
-	if( (x+dx) > 0 && (x+dx) < WIDTH ){
-		x = x + dx;
-	}
-	if ( (y+dy) > 0 && (y+dy) < HEIGHT ){
-		y = y + dy;
-	}
-	sprite.setPosition(x,y);
+    // ignore
 }
 
 void Person::harm(int hp){
 	health = health - hp;
 	punch.play();
+}
+
+void Person::render(sf::RenderTarget& window) {
+
+}
+
+void Person::update() {
+	float delta = (float(movementClock.restart().asMicroseconds()) * float(1e-6));
+    
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+		y -= speed * delta;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+		y += speed * delta;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		x -= speed * delta;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		x += speed * delta;
+	}
+
+	sprite.setPosition(x, y);
+}
+
+float Person::getSpeed() {
+	return speed;
+}
+
+void Person::setSpeed(float pixelsPerSecond) {
+	speed = pixelsPerSecond;
 }
