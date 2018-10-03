@@ -73,6 +73,7 @@ void Person::render(sf::RenderTarget& window) {
         rect.left = rect.width * idleAnim[currentFrame];
     }
 
+    // If we're facing left, we want to flip the texture coordinates.
 	if (facing == PlayerDirection::West) {
         rect.left += rect.width;
 		rect.width = -rect.width;
@@ -87,21 +88,21 @@ void Person::update() {
 
     running = false;
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 		y -= speed * delta;
         running = true;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 		y += speed * delta;
         running = true;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 		x -= speed * delta;
         running = true;
         facing = PlayerDirection::West;
 	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 		x += speed * delta;
         running = true;
         facing = PlayerDirection::East;
