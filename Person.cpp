@@ -4,7 +4,7 @@
 #include <iostream>
 
 Person::Person(){
-	if(!texture.loadFromFile("sprites/person.png")){
+	if(!texture.loadFromFile("sprites/player_movement.png")){
 		exit(EXIT_FAILURE);
 	}
 	sprite.setTexture(texture);
@@ -48,23 +48,56 @@ void Person::harm(int hp){
 
 void Person::render(sf::RenderTarget& window) {
 
+    if (animationClock.getElapsedTime().asMilliseconds() > ANIMATION_SPEED) {
+        currentFrame++;
+		animationClock.restart();
+    }
+    
+    if (running) {
+        if (currentFrame >= runAnim.size()) {
+            currentFrame = 0;
+        }
+
+    }
+    else {
+        if (currentFrame >= idleAnim.size()) {
+            currentFrame = 0;
+        }
+    }
+
+    sf::IntRect rect = playerFrameSize;
+
+    if (running) {
+        rect.left = rect.width * runAnim[currentFrame];
+    } else {
+        rect.left = rect.width * idleAnim[currentFrame];
+    }
+
+    sprite.setTextureRect(rect);
+
 }
 
 void Person::update() {
 	float delta = (float(movementClock.restart().asMicroseconds()) * float(1e-6));
-    
+
+    running = false;
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
 		y -= speed * delta;
+        running = true;
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
 		y += speed * delta;
+        running = true;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 		x -= speed * delta;
+        running = true;
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 		x += speed * delta;
+        running = true;
 	}
 
 	sprite.setPosition(x, y);

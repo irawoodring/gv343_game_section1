@@ -7,5 +7,6 @@
 
 #define		STARTING_HEALTH	100
 #define     STARTING_SPEED 200
+#define     ANIMATION_SPEED 100
 
 #endif
