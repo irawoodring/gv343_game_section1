@@ -32,6 +32,9 @@ class Person {
 
 		// Set the player speed in pixels per second
 		void setSpeed(float pixelsPerSecond);
+
+        // get the player position as a (x, y) vector
+        sf::Vector2f getPosition();
 		
 	private:
 		sf::Sprite sprite;

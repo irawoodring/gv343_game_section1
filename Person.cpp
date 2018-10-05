@@ -118,3 +118,7 @@ float Person::getSpeed() {
 void Person::setSpeed(float pixelsPerSecond) {
 	speed = pixelsPerSecond;
 }
+
+sf::Vector2f Person::getPosition() {
+    return {x, y};
+}
