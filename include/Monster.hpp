@@ -12,10 +12,13 @@ class Monster {
 		int y;
 		sf::Texture texture;
 		sf::Sprite sprite;
+		int velocityX;
+		int velocityY;
 
 	public:
 		Monster();
 		Monster(std::string path);
+		Monster(int x, int y);
 		int getHealth();
 		void setHealth(int health);
 		void setAttackPower(int attackPower);

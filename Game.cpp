@@ -134,11 +134,11 @@ void Game::run()
 	music.setVolume(50);
 	music.setLoop(true);
 	music.play();
-
+	int frames = 0;
 	while (!done)
 	{
 		processEvents();
-		update();
+		update(frames);
 		render();
 	}
 	music.stop();
@@ -189,7 +189,7 @@ void Game::processEvents()
  * checking collisions, updating score variables, etc.
  */
 
-void Game::update()
+void Game::update(int frames)
 {
 	for(auto it = monsters.begin(); it != monsters.end(); ++it){
 		if(Collision::BoundingBoxTest(player.getSprite(), it->getSprite())){
@@ -198,6 +198,9 @@ void Game::update()
 			std::random_device rd;
 			std::mt19937 engine(rd());
 			player.updatePosition(distribution(engine), distribution(engine));
+		}
+		if (frames % 240 == 0) {
+			it->updatePosition(player.getX(), player.getY());
 		}
 	}
 	if(player.getHealth() <= 0){

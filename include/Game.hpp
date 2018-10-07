@@ -14,7 +14,7 @@ class Game {
 	private:
 		sf::RenderWindow window;
 		void processEvents();
-		void update();
+		void update(int frames);
 		void render();
 
 		std::vector<Monster> monsters;
