@@ -3,15 +3,13 @@
 #include "SFML/Graphics.hpp"
 
 class Intro {
-
-	sf::RenderWindow window;
-
+	
     public:
-	Intro();
-	int passWindow( sf::RenderWindow& );
+	Intro( sf::RenderWindow& );
 	int showIntro();
 	// Add any private variables here. Including SFML members.
     private:
+	sf::RenderWindow window;
 
 
 
