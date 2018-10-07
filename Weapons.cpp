@@ -1,7 +1,6 @@
 #include <string>
 #include "Weapons.hpp"
 
-
 	Weapons::Weapons(){
 		range = 0;
 		damage = 0;
