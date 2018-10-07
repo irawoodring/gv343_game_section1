@@ -1,0 +1,131 @@
+cmake_minimum_required(VERSION 3.12)
+project(gv343_game_section1)
+
+set(CMAKE_CXX_STANDARD 14)
+
+include_directories(include)
+include_directories(SFML)
+include_directories(SFML/Audio)
+include_directories(SFML/Graphics)
+include_directories(SFML/Network)
+include_directories(SFML/System)
+include_directories(SFML/Window)
+
+add_executable(gv343_game_section1
+        include/Collision.hpp
+        include/Game.hpp
+        include/Monster.hpp
+        include/Person.hpp
+        include/Settings.hpp
+        SFML/Audio/AlResource.hpp
+        SFML/Audio/Export.hpp
+        SFML/Audio/InputSoundFile.hpp
+        SFML/Audio/Listener.hpp
+        SFML/Audio/Music.hpp
+        SFML/Audio/OutputSoundFile.hpp
+        SFML/Audio/Sound.hpp
+        SFML/Audio/SoundBuffer.hpp
+        SFML/Audio/SoundBufferRecorder.hpp
+        SFML/Audio/SoundFileFactory.hpp
+        SFML/Audio/SoundFileFactory.inl
+        SFML/Audio/SoundFileReader.hpp
+        SFML/Audio/SoundFileWriter.hpp
+        SFML/Audio/SoundRecorder.hpp
+        SFML/Audio/SoundSource.hpp
+        SFML/Audio/SoundStream.hpp
+        SFML/Graphics/BlendMode.hpp
+        SFML/Graphics/CircleShape.hpp
+        SFML/Graphics/Color.hpp
+        SFML/Graphics/ConvexShape.hpp
+        SFML/Graphics/Drawable.hpp
+        SFML/Graphics/Export.hpp
+        SFML/Graphics/Font.hpp
+        SFML/Graphics/Glsl.hpp
+        SFML/Graphics/Glsl.inl
+        SFML/Graphics/Glyph.hpp
+        SFML/Graphics/Image.hpp
+        SFML/Graphics/PrimitiveType.hpp
+        SFML/Graphics/Rect.hpp
+        SFML/Graphics/Rect.inl
+        SFML/Graphics/RectangleShape.hpp
+        SFML/Graphics/RenderStates.hpp
+        SFML/Graphics/RenderTarget.hpp
+        SFML/Graphics/RenderTexture.hpp
+        SFML/Graphics/RenderWindow.hpp
+        SFML/Graphics/Shader.hpp
+        SFML/Graphics/Shape.hpp
+        SFML/Graphics/Sprite.hpp
+        SFML/Graphics/Text.hpp
+        SFML/Graphics/Texture.hpp
+        SFML/Graphics/Transform.hpp
+        SFML/Graphics/Transformable.hpp
+        SFML/Graphics/Vertex.hpp
+        SFML/Graphics/VertexArray.hpp
+        SFML/Graphics/VertexBuffer.hpp
+        SFML/Graphics/View.hpp
+        SFML/Network/Export.hpp
+        SFML/Network/Ftp.hpp
+        SFML/Network/Http.hpp
+        SFML/Network/IpAddress.hpp
+        SFML/Network/Packet.hpp
+        SFML/Network/Socket.hpp
+        SFML/Network/SocketHandle.hpp
+        SFML/Network/SocketSelector.hpp
+        SFML/Network/TcpListener.hpp
+        SFML/Network/TcpSocket.hpp
+        SFML/Network/UdpSocket.hpp
+        SFML/System/Clock.hpp
+        SFML/System/Err.hpp
+        SFML/System/Export.hpp
+        SFML/System/FileInputStream.hpp
+        SFML/System/InputStream.hpp
+        SFML/System/Lock.hpp
+        SFML/System/MemoryInputStream.hpp
+        SFML/System/Mutex.hpp
+        SFML/System/NativeActivity.hpp
+        SFML/System/NonCopyable.hpp
+        SFML/System/Sleep.hpp
+        SFML/System/String.hpp
+        SFML/System/String.inl
+        SFML/System/Thread.hpp
+        SFML/System/Thread.inl
+        SFML/System/ThreadLocal.hpp
+        SFML/System/ThreadLocalPtr.hpp
+        SFML/System/ThreadLocalPtr.inl
+        SFML/System/Time.hpp
+        SFML/System/Utf.hpp
+        SFML/System/Utf.inl
+        SFML/System/Vector2.hpp
+        SFML/System/Vector2.inl
+        SFML/System/Vector3.hpp
+        SFML/System/Vector3.inl
+        SFML/Window/Clipboard.hpp
+        SFML/Window/Context.hpp
+        SFML/Window/ContextSettings.hpp
+        SFML/Window/Cursor.hpp
+        SFML/Window/Event.hpp
+        SFML/Window/Export.hpp
+        SFML/Window/GlResource.hpp
+        SFML/Window/Joystick.hpp
+        SFML/Window/Keyboard.hpp
+        SFML/Window/Mouse.hpp
+        SFML/Window/Sensor.hpp
+        SFML/Window/Touch.hpp
+        SFML/Window/VideoMode.hpp
+        SFML/Window/Window.hpp
+        SFML/Window/WindowHandle.hpp
+        SFML/Window/WindowStyle.hpp
+        SFML/Audio.hpp
+        SFML/Config.hpp
+        SFML/GpuPreference.hpp
+        SFML/Graphics.hpp
+        SFML/Main.hpp
+        SFML/Network.hpp
+        SFML/OpenGL.hpp
+        SFML/System.hpp
+        SFML/Window.hpp
+        Collision.cpp
+        Game.cpp
+        main.cpp
+        Monster.cpp
+        Person.cpp)
