@@ -200,7 +200,13 @@ void Game::update(int frames)
 			std::random_device rd;
 			std::mt19937 engine(rd());
 			player.updatePosition(distribution(engine), distribution(engine));
+
 		}
+		if (it->dead()){
+		    score += it->getScore();
+		    monsters.erase(it);
+		}
+
 		if (frames % 240 == 0) {
 			it->updatePosition(player.getX(), player.getY());
 		}

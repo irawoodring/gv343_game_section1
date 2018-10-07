@@ -7,12 +7,17 @@
 #include <string>
 
 class robeguy: public Monster{
-    Monster::robeguy(){
+    robeguy(){
         std::string path = "sprites/robeguy.png";
         Monster::Monster(path);
         int health = 80;
         Monster::setHealth(health);
         int attackPower = 30;
         Monster::setAttackPower(attackPower);
+        this->setScore()
+    }
+
+    void Monster::updatePosition(int x, int y) {
+
     }
 };
