@@ -1,20 +1,19 @@
 #include <iostream>
 #include "SFML/Graphics.hpp"
-class Intro {
+#include "Intro.hpp"
 
-	
-	Intro::Intro(sf::RenderWindow &win) : window(win){
+namespace Intro{
+	Intro::Intro(sf::RenderWindow &win) : window(win) {
 		this -> showIntro();
+		
 	}
 	
-	Intro::showIntro(){
+	int Intro::showIntro(){
 
-	
+	return 0;	
 
 	}
-
-	
-
+}
 
 
 
@@ -28,6 +27,6 @@ class Intro {
 
 
 
-};
+
 
 
