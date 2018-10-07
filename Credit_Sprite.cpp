@@ -9,16 +9,22 @@ Credit_Sprite::Credit_Sprite(std::string color){
 	this -> color = color;
 } 
 
-void Credit_Sprite::update(std::string currentFrame){
-	sstream << color << "_slime_" << currentFrame << ".png";
+void Credit_Sprite::update(int currentFrame){
+	sstream.str(std::string());
+	
+	if(currentFrame < 10)
+		sstream << "sprites/"<< color << "_slime_0" << currentFrame << ".png";
+	else
+		sstream << "sprites/"<< color << "_slime_" << currentFrame << ".png";
 	this -> fileName = sstream.str();
 
 	if(!texture.loadFromFile(fileName)){
 		std::cerr << "Can't load sprite" << std::endl;
 		exit(EXIT_FAILURE);
-	} 
+	}
+	sprite.setTexture(texture);
 }
 
-sf::Texture Credit_Sprite::getSprite(){
-	return this -> texture;
+sf::Sprite Credit_Sprite::getSprite(){
+	return this -> sprite;
 }

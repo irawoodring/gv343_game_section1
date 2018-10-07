@@ -9,8 +9,8 @@
 class Credit_Sprite{
 	public:
 		Credit_Sprite(std::string color);
-		void update(std::string currentFrame);
-		sf::Texture getSprite();
+		void update(int currentFrame);
+		sf::Sprite getSprite();
 	private:
 		std::ostringstream sstream;
 
@@ -18,6 +18,7 @@ class Credit_Sprite{
 		std::vector<std::string> frames;
 		std::string fileName;
 		sf::Texture texture;
+		sf::Sprite sprite;
 };
 
 #endif

@@ -14,6 +14,7 @@ class Credits{
 
 	private:
 		sf::RenderWindow* window;
+		void end();
 };
 
 
