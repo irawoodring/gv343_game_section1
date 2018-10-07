@@ -19,9 +19,9 @@ int Credits::start(){
 	//std::cout << "press any char to continue" << std::endl;
 	//char input;
 	//std::cin >> input;
-	Credit_Sprite cs = Credit_Sprite("green");
+	Credit_Sprite cs = Credit_Sprite("green", 26);
 
-	for(int i = 0; i < 18; i++){
+	for(int i = 0; i < cs.getNumFrames(); i++){
 		cs.update(i);
 		window -> clear();
 		window -> draw(cs.getSprite());

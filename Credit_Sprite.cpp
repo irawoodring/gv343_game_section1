@@ -5,8 +5,11 @@
 #include <iostream>
 #include <sstream>
 
-Credit_Sprite::Credit_Sprite(std::string color){
+Credit_Sprite::Credit_Sprite(std::string color, int numFrames){
 	this -> color = color;
+	this -> numFrames = numFrames;
+
+	sprite.setPosition(100,100);
 } 
 
 void Credit_Sprite::update(int currentFrame){
@@ -27,4 +30,8 @@ void Credit_Sprite::update(int currentFrame){
 
 sf::Sprite Credit_Sprite::getSprite(){
 	return this -> sprite;
+}
+
+int Credit_Sprite::getNumFrames(){
+	return numFrames;
 }
