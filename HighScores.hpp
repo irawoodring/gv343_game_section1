@@ -10,19 +10,17 @@
 #include "SFML/Graphics.hpp"
 #include <vector>
 
-class HighScores {
+class HighScores{
 	public:
-		HighScores(sf::RenderWindow &window);
-		int launchHighScoresScreen();	
+		HighScores(sf::RenderWindow &window, int score);
+		int displayHighScores();
+		int launchHighScoresScreen();
+		std::string readScoresToString();
+		int score;	
 	private:
 		sf::RenderWindow &window;
 		int addToScores(std::string initials, int score);
 		// Need a vector for holding on to scores
-
-
-
-
-
 
 };
 

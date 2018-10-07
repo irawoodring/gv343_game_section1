@@ -1,19 +1,23 @@
 #include <iostream>
-#include <string.h>
-#include<iostream>
 #include<fstream>
+#include <cstring>
+#include <stdio.h>
+#include <stdlib.h>
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
 #include "HighScores.hpp"
 #include "include/Settings.hpp"
 
-HighScores::HighScores(sf::RenderWindow &rw):window(rw){
-	/* Setting the High Scores window to the current game window */
+/* Constructor takes the window and the score of the
+current player */
+HighScores::HighScores(sf::RenderWindow &rw, int score):window(rw){
+	this->score = score;
 } 
 
+/* Launches the screen to add your high score to the high scores
+text file */
 int HighScores::launchHighScoresScreen(){
 	window.clear();
-
 	sf::Font font;
 	if(!font.loadFromFile("fonts/Notable-Regular.ttf")){
 		return EXIT_FAILURE;
@@ -24,17 +28,130 @@ int HighScores::launchHighScoresScreen(){
 	title.setString("HIGH SCORES");
 	title.setCharacterSize(64);
 	title.setFillColor(sf::Color::White);
-	title.setPosition(10,200);
+	title.setPosition(110,40);
 
-	sf::Text text;
-	text.setFont(font);
-	text.setString("TEST TEST");
-	text.setCharacterSize(24);
-	text.setFillColor(sf::Color::White);
-	text.setPosition(150, 350); 
-	while(1){}
+	sf::Text enterLabel;
+	enterLabel.setFont(font);
+	enterLabel.setString("Enter your initials:");
+	enterLabel.setCharacterSize(24);
+	enterLabel.setFillColor(sf::Color::White);
+	enterLabel.setPosition(60, 250); 
+
+	sf::Text initialsLabel;
+	initialsLabel.setFont(font);
+	initialsLabel.setCharacterSize(24);
+	initialsLabel.setFillColor(sf::Color::White);
+	initialsLabel.setPosition(480, 250); 	
+
+	sf::Text scoreLabel;
+	scoreLabel.setFont(font);
+	scoreLabel.setString(std::to_string(score));
+	scoreLabel.setCharacterSize(24);
+	scoreLabel.setFillColor(sf::Color::White);
+	scoreLabel.setPosition(620, 250); 	
+
+	sf::Clock clock;
+	std::string initials;
+	while(window.isOpen()){
+		sf::Event event;
+		window.clear();
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed){
+				window.close();
+				exit(0);				
+			}
+			/* Return key calls addToScores to write the score to file */
+			if(event.type == sf::Event::KeyPressed){
+				if(event.key.code == sf::Keyboard::Return){
+					window.clear();
+					HighScores::addToScores(initials, score);
+					return 0;
+				}
+			}
+			/* Referenced: https://en.sfml-dev.org/forums/index.php?topic=2269.0 */
+			if (event.type == sf::Event::TextEntered){
+				if (event.text.unicode < 128){
+					if(initials.size() < 3){
+						initials += static_cast<char>(event.text.unicode);
+						initialsLabel.setString(initials);						
+					}
+				}
+			}
+		}
+		window.draw(title);
+		window.draw(enterLabel);
+		window.draw(initialsLabel);
+		window.draw(scoreLabel);
+		window.display();
+		sf::Time time = clock.getElapsedTime();
+		sf::Int32 mills = time.asMilliseconds();
+		if(mills % 1000 > 500){
+			title.setFillColor(sf::Color::Black);
+		} else {
+			title.setFillColor(sf::Color::White);
+		}
+	}
+	return 0;
 }
 
+/* Launches screen to display high scores */
+int HighScores::displayHighScores(){
+	window.clear(sf::Color(0, 0, 0));
+	sf::Font font;
+	if(!font.loadFromFile("fonts/Notable-Regular.ttf")){
+		return EXIT_FAILURE;
+	}
+
+	sf::Text title;
+	title.setFont(font);
+	title.setString("HIGH SCORES");
+	title.setCharacterSize(64);
+	title.setFillColor(sf::Color::White);
+	title.setPosition(110,20);
+
+	sf::Text scores;
+	scores.setFont(font);
+	scores.setString(HighScores::readScoresToString());
+	scores.setCharacterSize(32);
+	scores.setFillColor(sf::Color::White);
+	scores.setPosition(280,140);
+
+	sf::Clock clock;
+	std::string initials;
+	while(window.isOpen()){
+		sf::Event event;
+		window.clear();
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed){
+				window.close();
+				exit(0);
+				
+			}
+			if(event.type == sf::Event::KeyPressed){
+				if(event.key.code == sf::Keyboard::Return){
+					window.clear();
+					return 0;
+				}
+			}
+		}
+		window.draw(title);
+		window.draw(scores);
+		window.display();
+		sf::Time time = clock.getElapsedTime();
+		sf::Int32 mills = time.asMilliseconds();
+		if(mills % 1000 > 500){
+			title.setFillColor(sf::Color::Black);
+		} else {
+			title.setFillColor(sf::Color::White);
+		}
+	}
+	return 0;
+}
+
+/* Adds the players score and initials into the HighScores.txt file
+if it exists, otherwise it creates the file and players score is first in */
 int HighScores::addToScores(std::string initials, int score) {
     std::string line;
     bool hasWritten = false;
@@ -86,13 +203,23 @@ int HighScores::addToScores(std::string initials, int score) {
     return 1;
 }
 
+/* Function to open file and read content into String file
+Referenced: https://stackoverflow.com/questions/25517397/create-stdstring-from-stdistreambuf-iterator-strange-syntax-quirk */
+std::string HighScores::readScoresToString(){
+	std::ifstream ifs("HighScores.txt");
+    std::string content( (std::istreambuf_iterator<char>(ifs) ),
+                       (std::istreambuf_iterator<char>()    ) );
+	return content;
+}
+
 /* TEST MAIN TO BE DELETED */
-int main(int argc, char** argv){
+/*int main(int argc, char** argv){
 	sf::RenderWindow window;
 	window.create(sf::VideoMode(WIDTH, HEIGHT + 100), "Not on my block.");
-    //HighScores h = new HighScores(window);
-	//h.launchHighScoresScreen();
-}
+    HighScores h(window, 66677);
+	h.launchHighScoresScreen();
+	h.displayHighScores();
+}*/
 
 
 
