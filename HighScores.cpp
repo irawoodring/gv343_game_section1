@@ -2,9 +2,40 @@
 #include <string.h>
 #include<iostream>
 #include<fstream>
-#include "HighScores.h"
+#include "SFML/Audio.hpp"
+#include "SFML/Graphics.hpp"
+#include "HighScores.hpp"
+#include "include/Settings.hpp"
 
-int addToScores(std::string initials, int score) {
+HighScores::HighScores(sf::RenderWindow &rw):window(rw){
+	/* Setting the High Scores window to the current game window */
+} 
+
+int HighScores::launchHighScoresScreen(){
+	window.clear();
+
+	sf::Font font;
+	if(!font.loadFromFile("fonts/Notable-Regular.ttf")){
+		return EXIT_FAILURE;
+	}
+
+	sf::Text title;
+	title.setFont(font);
+	title.setString("HIGH SCORES");
+	title.setCharacterSize(64);
+	title.setFillColor(sf::Color::White);
+	title.setPosition(10,200);
+
+	sf::Text text;
+	text.setFont(font);
+	text.setString("TEST TEST");
+	text.setCharacterSize(24);
+	text.setFillColor(sf::Color::White);
+	text.setPosition(150, 350); 
+	while(1){}
+}
+
+int HighScores::addToScores(std::string initials, int score) {
     std::string line;
     bool hasWritten = false;
     /* Opens HighScores.txt to read if file exists
@@ -54,3 +85,19 @@ int addToScores(std::string initials, int score) {
     rename("temp.txt", "HighScores.txt");
     return 1;
 }
+
+/* TEST MAIN TO BE DELETED */
+int main(int argc, char** argv){
+	sf::RenderWindow window;
+	window.create(sf::VideoMode(WIDTH, HEIGHT + 100), "Not on my block.");
+    //HighScores h = new HighScores(window);
+	//h.launchHighScoresScreen();
+}
+
+
+
+
+
+
+
+
