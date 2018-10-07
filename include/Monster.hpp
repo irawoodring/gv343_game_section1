@@ -25,6 +25,7 @@ class Monster {
 		void harm(int amount);
 		void updatePosition(int x, int y);
 		sf::Sprite getSprite();
+		bool dead();
 };
 
 #endif

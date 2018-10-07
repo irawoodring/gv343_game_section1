@@ -49,7 +49,7 @@ bool Monster::dead(){
 	return (health < 0);
 }
 
-oid Monster::updatePosition(int personX, int personY){
+void Monster::updatePosition(int personX, int personY){
 	int desiredX = (personX - this->x) ;
 	int desiredY = (personY - this->y) ;
 
