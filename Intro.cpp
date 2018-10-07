@@ -2,13 +2,21 @@
 #include "SFML/Graphics.hpp"
 class Intro {
 
-int passWindow( sf::RenderWindow& window ){
+	
+	Intro::Intro(sf::RenderWindow &win) : window(win){
+		this -> showIntro();
+	}
+	
+	Intro::showIntro(){
 
-	window.clear();
-	window.create(sf::VideoMode(800,600),"Introducing...");
+	
+
+	}
+
+	
 
 
-}
+
 
 
 
