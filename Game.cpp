@@ -1,7 +1,7 @@
 /*
  * Game.cpp
- * Much code taken from SFML tutorials on SFML site.  Basic
- * flow tutorial at
+ * Much code taken from SFML tutorials on SFML site.  Basic 
+ * flow tutorial at 
  * from https://maksimdan.gitbooks.io/sfml-and-gamedevelopement/content/game_class.html
  *
  * You will need to read SFML API and other documentation to understand this code
@@ -14,7 +14,6 @@
 #include "Settings.hpp"
 #include <iostream>
 #include <random>
-#include <Intro.hpp>
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
 
@@ -23,19 +22,11 @@
  * initial state of shared variables.
  */
 Game::Game(){
-	// Creates the window.  We are using the same window for
+	// Creates the window.  We are using the same window for 
 	// the intro screen as the game, though this can change.
 	window.create(sf::VideoMode(WIDTH, HEIGHT + 100), "Not on my block.");
 	// when done is true we quit
 	done = false;
-	//td::default_random_engine generator;
-	//std::uniform_int_distribution<int> distribution(0,20);
-	// Add monsters to the game via a vector of Monsters.
-	for(int i = 0; i < 5; i++){
-		//int randonX = distribution(generator);
-		//int randomY = distribution(generate);
-		monsters.push_back(Monster(i*10, i*5));
-	}
 	// The "standard" game font is loaded here.
 	if(!font.loadFromFile("fonts/Notable-Regular.ttf")){
 		std::cerr << "We should be throwing exceptions here... font can't load." << std::endl;
@@ -49,18 +40,78 @@ Game::Game(){
  */
 
 int Game::start(){
-  // Build our game intro
-  intro::Intro i;
+	window.clear();
+	sf::Texture splash;
+	if(!splash.loadFromFile("./images/neighborhood.png")){
+		std::cerr << "Can't load start image." << std::endl;
+	}
+	sf::Sprite sprite;
+	sprite.setTexture(splash);
 
-  // Build our window context and pass the ref
-  auto intro_window = i.construct_window_context(800, 600, "Video Games, OH YEAH");
+	sf::Font font;
+	if(!font.loadFromFile("fonts/Notable-Regular.ttf")){
+		return EXIT_FAILURE;
+	}
 
-  // Deref our window and show it
-  int running = i.show(*intro_window);
-  if (running < 0) {
-    std::cerr << "Oh man the intro screen broke :(" << std::endl;
-    return EXIT_FAILURE;
-  }
+	sf::Text title;
+	title.setFont(font);
+	title.setString("Not on my block.");
+	title.setCharacterSize(64);
+	title.setFillColor(sf::Color::White);
+	title.setPosition(10,200);
+
+	sf::Text text;
+	text.setFont(font);
+	text.setString("(Press Enter to continue)");
+	text.setCharacterSize(24);
+	text.setFillColor(sf::Color::White);
+	text.setPosition(150, 350); 
+
+	sf::Clock clock;
+
+	sf::Music music;
+	if(!music.openFromFile("music/epic_hero.wav")){
+		return EXIT_FAILURE;
+	}
+	monsters.clear();
+	// Add monsters to the game via a vector of Monsters.
+	monsters.push_back(Monster(20, 20, 100, 50));
+
+	music.play();
+	while (window.isOpen())
+	{
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed){
+				window.close();
+				music.stop();
+				exit(0);
+			}
+
+			if(event.type == sf::Event::KeyPressed){
+				if(event.key.code == sf::Keyboard::Return){
+					window.clear();
+					music.stop();
+					return 0;
+				}
+			}
+
+		}
+
+		window.draw(sprite);
+		window.draw(title);
+		window.draw(text);
+		window.display();
+
+		sf::Time time = clock.getElapsedTime();
+		sf::Int32 mills = time.asMilliseconds();
+		if(mills % 1000 > 500){
+			text.setFillColor(sf::Color::Black);
+		} else {
+			text.setFillColor(sf::Color::White);
+		}
+	}
 
 	return 0;
 }
@@ -95,7 +146,7 @@ void Game::run()
 	music.stop();
 }
 
-/*
+/* 
  * All game events such as keypresses are handled
  * here.
  */
@@ -128,7 +179,7 @@ void Game::processEvents()
 					break;
 					default:
 					break;
-				}
+				}				
 			default:
 				break;
 		}
@@ -142,10 +193,10 @@ void Game::processEvents()
 
 void Game::update(int frames)
 {
-	for(auto it = monsters.begin(); it != monsters.end(); ++it) {
-		if (Collision::BoundingBoxTest(player.getSprite(), it->getSprite())) {
-			player.harm(20);
-			std::uniform_int_distribution<int> distribution(0, 50);
+	for(auto it = monsters.begin(); it != monsters.end(); ++it){
+		if(Collision::BoundingBoxTest(player.getSprite(), it->getSprite())){
+			player.harm(it->getAttackPower());
+			std::uniform_int_distribution<int> distribution(0,50);
 			std::random_device rd;
 			std::mt19937 engine(rd());
 			player.updatePosition(distribution(engine), distribution(engine));
@@ -153,6 +204,11 @@ void Game::update(int frames)
 		if (frames % 240 == 0) {
 			it->updatePosition(player.getX(), player.getY());
 		}
+	}
+
+	if(monsters.size() == 0){
+		// Add monsters to the game via a vector of Monsters.
+		monsters.push_back(Monster(20, 20, 100, 50));
 	}
 	if(player.getHealth() <= 0){
 		done = true;

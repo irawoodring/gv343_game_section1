@@ -46,15 +46,15 @@ void Person::updatePosition(int dx, int dy){
 	sprite.setPosition(x,y);
 }
 
+void Person::harm(int hp){
+	health = health - hp;
+	punch.play();
+}
+
 int Person::getX(){
 	return x;
 }
 
 int Person::getY(){
 	return y;
-}
-
-void Person::harm(int hp){
-	health = health - hp;
-	punch.play();
 }
