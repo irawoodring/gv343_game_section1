@@ -3,7 +3,7 @@
 #include <iostream>
 
 void zombie(){
-    std::String path = "sprites/zombie1.png"
+    std::String path = "sprites/zombie1.png";
     Monster::Monster(path);
     int health = 100;
     Monster::setHealth(health);

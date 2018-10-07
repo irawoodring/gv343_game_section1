@@ -13,6 +13,8 @@ Monster::Monster(int x, int y){
 	this->x = x;
 	this ->y = y;
 	sprite.setPosition(x, y);
+	this->health = health;
+	sprite.setPosition(100,100);
 	velocityX = 0;
 	velocityY = -2;
 }
@@ -44,6 +46,11 @@ void Monster::harm(int amount){
 	health = health - amount;
 }
 
+
+bool Monster::dead(){
+	return (health < 0);
+}
+
 void Monster::updatePosition(int personX, int personY){
 	int desiredX = (personX - this->x) ;
 	int desiredY = (personY - this->y) ;
@@ -61,6 +68,9 @@ void Monster::updatePosition(int personX, int personY){
 	std::cout << this->y <<std::endl;
 	std::cout<< this->velocityX <<std::endl;
 	std::cout << this->velocityY <<std::endl;
+	std::cout<< this->y <<std::endl;
+	std::cout<< this->velocityX <<std::endl;
+	std::cout<< this->velocityY <<std::endl;
 }
 
 sf::Sprite Monster::getSprite(){

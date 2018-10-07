@@ -13,6 +13,8 @@ class Person {
 		sf::Sprite getSprite();
 		void harm(int hp);
 		void updatePosition(int x, int y);
+		int getX();
+		int getY();
 		
 	private:
 		sf::Sprite sprite;
