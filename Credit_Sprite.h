@@ -4,16 +4,20 @@
 #include "SFML/Graphics.hpp"
 #include <vector>
 #include <string>
+#include <sstream>
 
 class Credit_Sprite{
 	public:
 		Credit_Sprite(std::string color);
-		void update(int currentFrame);
+		void update(std::string currentFrame);
+		sf::Texture getSprite();
 	private:
+		std::ostringstream sstream;
+
 		std::string color;
-		sf::Texture texture;
 		std::vector<std::string> frames;
-		
+		std::string fileName;
+		sf::Texture texture;
 };
 
 #endif
