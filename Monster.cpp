@@ -17,6 +17,25 @@ Monster::Monster(int x, int y){
 	velocityY = -2;
 }
 
+Monster::Monster(std::string path){
+	if (!texture.loadFromFile(path)){
+		std::cerr << "Can't load sprite." << std::endl;
+		exit(EXIT_FAILURE);
+	}
+	sprite.setTexture(texture);
+	sf::FloatRect spriteSize = sprite.getGlobalBounds();
+	sprite.setOrigin(spriteSize.width/2.0,spriteSize.height/2.0);
+	sprite.setPosition(100,100);
+}
+
+void Monster::setAttackPower(int attackPower){
+	this->attackPower = attackPower;
+}
+
+void Monster::setHealth(int health){
+	this->health = health;
+}
+
 int Monster::getHealth(){
 	return health;
 }
