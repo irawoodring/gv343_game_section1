@@ -9,7 +9,7 @@ Credit_Sprite::Credit_Sprite(std::string color, int numFrames){
 	this -> color = color;
 	this -> numFrames = numFrames;
 
-	sprite.setPosition(100,100);
+	sprite.setPosition(25,0);
 } 
 
 void Credit_Sprite::update(int currentFrame){
