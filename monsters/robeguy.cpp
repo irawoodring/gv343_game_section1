@@ -12,4 +12,5 @@ robeguy::robeguy(int x_t, int y_t, int health, int damage,int score): Monster(x_
 
 void robeguy::setSprite(){
     std::string path = "sprites/robeguy.png";
+    sprite.setTexture(path);
 }
