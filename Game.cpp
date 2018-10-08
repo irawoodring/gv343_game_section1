@@ -16,6 +16,8 @@
 #include <random>
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
+#include "Weapons.hpp"
+#include "Brick.hpp"
 
 /*
  * Default constructor.  Creates our window and sets up
@@ -216,6 +218,7 @@ void Game::render()
 	for(auto it = monsters.begin(); it != monsters.end(); ++it){
 		window.draw( it->getSprite() );
 	}
+	window.draw(Brick().getSprite());
 	sf::RectangleShape border(sf::Vector2f(WIDTH, 20));
 	border.setPosition(sf::Vector2f(0,HEIGHT));
 	window.draw(border);
