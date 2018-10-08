@@ -2,7 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include <iostream>
 
-Monster::Monster(int x, int y, int health, int damage){
+Monster::Monster(int x, int y, int health, int damage, int score){
 	if (!texture.loadFromFile("sprites/monster_one.png")){
 		std::cerr << "Can't load sprite." << std::endl;
 		exit(EXIT_FAILURE);
@@ -101,3 +101,4 @@ sf::Sprite Monster::getSprite(){
 	sprite.setTexture(texture);
 	return this->sprite;
 }
+void robeguy::setSprite(){

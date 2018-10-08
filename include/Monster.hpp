@@ -21,7 +21,7 @@ class Monster {
 	public:
 		Monster();
 		Monster(std::string path);
-		Monster(int x, int y, int health, int damage);
+		Monster(int x, int y, int health, int damage, int score);
 		int getHealth();
 		void setHealth(int health);
 		void setAttackPower(int attackPower);
@@ -33,5 +33,7 @@ class Monster {
 		bool dead();
 		sf::Sprite getSprite();
 };
+
+
 
 #endif

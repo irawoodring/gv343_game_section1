@@ -21,6 +21,7 @@ class Game {
 		Person player;
 		bool done;
 		int score;
+		int rng, rngWidth, rngHeight;
 		sf::Text scoreLabel;
 		sf::Text playerHealth;	
         	sf::Font font;

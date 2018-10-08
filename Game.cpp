@@ -16,6 +16,11 @@
 #include <random>
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
+#include "robeguy.hpp"
+#include "zombie.hpp"
+#include "Ghost.hpp"
+
+class robeguy;
 
 /*
  * Default constructor.  Creates our window and sets up
@@ -75,7 +80,7 @@ int Game::start(){
 	}
 	monsters.clear();
 	// Add monsters to the game via a vector of Monsters.
-	monsters.push_back(Monster(20, 20, 100, 50));
+	monsters.push_back(Monster(20, 20, 100, 50, 1000));
 
 	music.play();
 	while (window.isOpen())
@@ -212,9 +217,28 @@ void Game::update(int frames)
 		}
 	}
 
-	if(monsters.size() == 0){
-		// Add monsters to the game via a vector of Monsters.
-		monsters.push_back(Monster(20, 20, 100, 50));
+	if(monsters.size() == 0 || frames % 50000) {
+        rng = rand() % 5;
+        // Add monsters to the game via a vector of Monsters.
+        rngWidth = rand() % WIDTH;
+        rngHeight = rand()% HEIGHT;
+        if (rng == 0) {
+            monsters.push_back(robeguy(rngWidth, rngHeight, 80, 30, 500));
+        }
+        else if (rng == 1) {
+            monsters.push_back(Ghost(rngWidth, rngHeight, 80, 30, 500));
+        }
+        else if (rng == 2) {
+            monsters.push_back(zombie(rngWidth, rngHeight, 80, 30, 500));
+        }
+        else if (rng == 3) {
+            monsters.push_back(placeholder(rngWidth, rngHeight, 80, 30, 500));
+        }
+        else if (rng == 4) {
+            monsters.push_back(placeholder(rngWidth, rngHeight, 80, 30, 500));
+        }
+
+    }
 	}
 	if(player.getHealth() <= 0){
 		done = true;
