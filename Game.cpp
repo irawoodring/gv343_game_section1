@@ -22,6 +22,7 @@
  * initial state of shared variables.
  */
 Game::Game(){
+
 	// Creates the window.  We are using the same window for 
 	// the intro screen as the game, though this can change.
 	window.create(sf::VideoMode(WIDTH, HEIGHT + 100), "Not on my block.");
@@ -69,12 +70,23 @@ int Game::start(){
 	text.setFillColor(sf::Color::White);
 	text.setPosition(150, 350); 
 
+
+// This is added in by gameOptions group for testing purposes
+	sf::Text options;
+	options.setFont(font);
+	options.setString("(Press 'O' For Options)");
+	options.setCharacterSize(24);
+	options.setFillColor(sf::Color::White);
+	options.setPosition(150, 450); 
+// End of added in text
 	sf::Clock clock;
 
 	sf::Music music;
 	if(!music.openFromFile("music/epic_hero.wav")){
 		return EXIT_FAILURE;
 	}
+	gameOptions optionsMenu(window,music);
+//ADDED IN
 
 	music.play();
 	while (window.isOpen())
@@ -94,6 +106,17 @@ int Game::start(){
 					music.stop();
 					return 0;
 				}
+// Added in for the options Menu
+				if(event.key.code == sf::Keyboard::O){
+					// gameOptions optionsMenu(gameMusic);
+					window.clear();
+					optionsMenu.displayMenu(window,music);
+					//window.clear();make
+					// music.stop();
+					// new gameOptions(&music);
+					//return 0;
+				}
+// Added in for options menu
 			}
 
 		}
@@ -101,14 +124,17 @@ int Game::start(){
 		window.draw(sprite);
 		window.draw(title);
 		window.draw(text);
+		window.draw(options);
 		window.display();
 
 		sf::Time time = clock.getElapsedTime();
 		sf::Int32 mills = time.asMilliseconds();
 		if(mills % 1000 > 500){
 			text.setFillColor(sf::Color::Black);
+			options.setFillColor(sf::Color::Black);
 		} else {
 			text.setFillColor(sf::Color::White);
+			options.setFillColor(sf::Color::Black);
 		}
 	}
 
@@ -191,6 +217,7 @@ void Game::processEvents()
 
 void Game::update()
 {
+
     player.update();
 
     for(auto it = monsters.begin(); it != monsters.end(); ++it){
