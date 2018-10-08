@@ -48,7 +48,7 @@ int Credits::start(){
 		return EXIT_FAILURE;
 	}
 
-	Credit_Sprite cs = Credit_Sprite("green", 26);
+	Credit_Sprite cs = Credit_Sprite("green", 25);
 
 	for(int s = 0; s < entries.size(); s++){
 		for(int i = 0; i < cs.getNumFrames(); i++){

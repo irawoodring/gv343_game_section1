@@ -43,12 +43,10 @@ int Credit_Sprite::getNumFrames(){
 }
 
 void Credit_Sprite::changeColor(){
-//	int range = 4 - 1;
-//	int num = std::rand() % range;
-	if(currentColor != 5)
-		currentColor++;	
+	if(currentColor == 4)
+		currentColor = 0;	
 	else
-		currentColor = 0;
+		currentColor++;
 
 	this -> color = colors[currentColor];
 }
