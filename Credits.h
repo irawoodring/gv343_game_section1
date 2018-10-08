@@ -8,26 +8,30 @@
 **********************************************************************/
 #ifndef CREDITS_H_
 #define CREDITS_H_
-
 #include "SFML/Graphics.hpp"
 #include "Credit_Sprite.h"
 
 class Credits{
 	public:
-		// Method calls for public functions
+		/* Method call to fix window */
 		Credits(sf::RenderWindow& gameWindow);
+		
+		/* Credits method default constructor */
 		Credits();
-	
-	
+		
+		/* Starts the program */
 		int start();
+
+		/* receives the window */
 		sf::RenderWindow* getWindow();
 
 	private:
-		// Private instance variables
+		/* Private instance variables */
 		sf::RenderWindow* window;
+
+		/* ends the screen */
 		void end();
+
 		std::vector<Credit_Sprite> slimes;
 };
-
-
 #endif
