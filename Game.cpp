@@ -12,6 +12,8 @@
 #include "Person.hpp"
 #include "Monster.hpp"
 #include "Settings.hpp"
+#include "Weapons.hpp"
+#include "Chainsaw.hpp"
 #include <iostream>
 #include <random>
 #include "SFML/Audio.hpp"
@@ -213,6 +215,7 @@ void Game::render()
 {
 	window.clear();
 	window.draw(player.getSprite());
+	//window.draw(Chainsaw().getSprite());
 	for(auto it = monsters.begin(); it != monsters.end(); ++it){
 		window.draw( it->getSprite() );
 	}
