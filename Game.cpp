@@ -218,7 +218,7 @@ void Game::render()
 	for(auto it = monsters.begin(); it != monsters.end(); ++it){
 		window.draw( it->getSprite() );
 	}
-	window.draw(Brick().getSprite());
+	//window.draw(Brick().getSprite());
 	sf::RectangleShape border(sf::Vector2f(WIDTH, 20));
 	border.setPosition(sf::Vector2f(0,HEIGHT));
 	window.draw(border);
