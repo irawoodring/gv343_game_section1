@@ -43,7 +43,7 @@ int Credit_Sprite::getNumFrames(){
 }
 
 void Credit_Sprite::changeColor(){
-	if(currentColor == 4)
+	if(currentColor == colors.size() - 1)
 		currentColor = 0;	
 	else
 		currentColor++;
