@@ -2,6 +2,7 @@
 #define CREDITS_H_
 
 #include "SFML/Graphics.hpp"
+#include "Credit_Sprite.h"
 
 class Credits{
 	public:
@@ -15,6 +16,7 @@ class Credits{
 	private:
 		sf::RenderWindow* window;
 		void end();
+		std::vector<Credit_Sprite> slimes;
 };
 
 
