@@ -11,6 +11,6 @@ class robeguy : public Monster {
     public:
             robeguy(int x, int y,int health, int damage, int score);
             sf::Sprite getSprite();
-            void robeguy::setSprite();
+            void setSprite();
 };
 #endif //GITHUB_ROBEGUY_H

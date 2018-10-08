@@ -101,4 +101,3 @@ sf::Sprite Monster::getSprite(){
 	sprite.setTexture(texture);
 	return this->sprite;
 }
-void robeguy::setSprite(){
