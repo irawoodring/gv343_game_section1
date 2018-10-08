@@ -1,12 +1,14 @@
 #include "Monster.hpp"
-#include "SFML/Graphics.hpp"
+#include "zombie.hpp"
+#include "../SFML/Graphics.hpp"
 #include <iostream>
+#include <string>
 
-void zombie(){
-    std::String path = "sprites/zombie1.png";
-    Monster::Monster(path);
-    int health = 100;
-    Monster::setHealth(health);
-    int attackPower = 10;
-    Monster::setAttackPower(attackPower);
+zombie::zombie(int x_t, int y_t, int health, int damage, int score):Monster(x_t, y_t, health, damage, score){
+    setSprite();
+}
+
+void zombie::setSprite(){
+  std::string path = "sprites/zombie/zombie1.png";
+  sprite.setTexture(path);
 }

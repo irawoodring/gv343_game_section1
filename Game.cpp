@@ -1,7 +1,7 @@
 /*
  * Game.cpp
- * Much code taken from SFML tutorials on SFML site.  Basic 
- * flow tutorial at 
+ * Much code taken from SFML tutorials on SFML site.  Basic
+ * flow tutorial at
  * from https://maksimdan.gitbooks.io/sfml-and-gamedevelopement/content/game_class.html
  *
  * You will need to read SFML API and other documentation to understand this code
@@ -17,8 +17,8 @@
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
 #include "robeguy.hpp"
-//#include "zombie.hpp"
-//#include "Ghost.hpp"
+#include "zombie.hpp"
+#include "Ghost.hpp"
 
 
 /*
@@ -26,7 +26,7 @@
  * initial state of shared variables.
  */
 Game::Game(){
-	// Creates the window.  We are using the same window for 
+	// Creates the window.  We are using the same window for
 	// the intro screen as the game, though this can change.
 	window.create(sf::VideoMode(WIDTH, HEIGHT + 100), "Not on my block.");
 	// when done is true we quit
@@ -69,7 +69,7 @@ int Game::start(){
 	text.setString("(Press Enter to continue)");
 	text.setCharacterSize(24);
 	text.setFillColor(sf::Color::White);
-	text.setPosition(150, 350); 
+	text.setPosition(150, 350);
 
 	sf::Clock clock;
 
@@ -150,7 +150,7 @@ void Game::run()
 	music.stop();
 }
 
-/* 
+/*
  * All game events such as keypresses are handled
  * here.
  */
@@ -183,7 +183,7 @@ void Game::processEvents()
 					break;
 					default:
 					break;
-				}				
+				}
 			default:
 				break;
 		}
@@ -226,12 +226,12 @@ void Game::update(int frames)
         	//robeguy a = robeguy(4, 4, 80, 30, 500);
             monsters.push_back(robeguy(4, 4, 80, 30, 500));
         }
-        //else if (rng == 1) {
-           // monsters.push_back(Ghost(rngWidth, rngHeight, 80, 30, 500));
-        //}
-        //else if (rng == 2) {
-           // monsters.push_back(zombie(rngWidth, rngHeight, 80, 30, 500));
-        //}
+        else if (rng == 1) {
+         		monsters.push_back(Ghost(rngWidth, rngHeight, 80, 30, 500));
+        }
+        else if (rng == 2) {
+           monsters.push_back(zombie(rngWidth, rngHeight, 80, 30, 500));
+        }
         //else if (rng == 3) {
            // monsters.push_back(placeholder(rngWidth, rngHeight, 80, 30, 500));
         //}
