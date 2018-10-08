@@ -237,7 +237,7 @@ void Game::update(int frames)
         }
 
     }
-	}
+
 	if(player.getHealth() <= 0){
 		done = true;
 	}
