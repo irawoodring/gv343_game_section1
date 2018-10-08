@@ -9,7 +9,7 @@
 class robeguy : public Monster {
 
     public:
-            robeguy(int x, int y,int health, int damage, int score);
+            robeguy(int x_t, int y_t,int health, int damage, int score);
             sf::Sprite getSprite();
             void setSprite();
 };

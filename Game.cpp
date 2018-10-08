@@ -20,8 +20,6 @@
 #include "zombie.hpp"
 #include "Ghost.hpp"
 
-class robeguy;
-
 /*
  * Default constructor.  Creates our window and sets up
  * initial state of shared variables.
