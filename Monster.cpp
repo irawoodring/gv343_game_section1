@@ -14,6 +14,7 @@ Monster::Monster(int x, int y, int health, int damage, int score){
 	this ->y = y;
 	this->health = health;
 	this->attackPower = damage;
+	this->score = score;
 	sprite.setPosition(x, y);
 	velocityX = 0;
 	velocityY = -2;
