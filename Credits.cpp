@@ -5,6 +5,18 @@
 #include <vector>
 #include "SFML/Graphics.hpp"
 
+
+/*****************************************************************
+Displays the credits for the game Not on my Block.
+
+@author Kehlsey Lewis, Hai Duoung, Logan Karney, Trungvuong Pham 
+@version Fall 2018
+*****************************************************************/
+
+/*****************************************************************
+    Constructor creates a renders a window to use for credits
+    @param size the length of each side in pixels
+    *****************************************************************/
 Credits::Credits(sf::RenderWindow& gameWindow){
 	this -> window = &gameWindow;
 	window -> setFramerateLimit(5);
@@ -14,6 +26,9 @@ sf::RenderWindow* Credits::getWindow(){
 	return window;
 }
 
+/*****************************************************************
+    This function starts the credit and displays it on the screen
+    *****************************************************************/
 int Credits::start(){
 	window -> clear();
 	window -> display();
@@ -24,16 +39,17 @@ int Credits::start(){
 	inFile.open("credits.txt");
 	std::string line;
 	std::vector<std::vector<std::string>> entries(11);
-	if(!inFile){
+
+	if(!inFile){ //error checking opening the file
 		std::cerr << "Error opening file";
 	}
 	
 	int local = 0;
+
+	//this opens the document and seprates by ~
 	if(inFile.is_open()){
 		while(getline (inFile,line)){
 				std::cout << line << std::endl;
-				//if(line.length() != 1){
-				//if(line.compare('\n') != 0){
 				if(line[0] != '~'){
 					entries[local].push_back(line);
 				}
@@ -43,6 +59,7 @@ int Credits::start(){
 		inFile.close();
 	}
 
+	//loads a font
 	sf::Font font;
 	if(!font.loadFromFile("fonts/Notable-Regular.ttf")){
 		return EXIT_FAILURE;
@@ -50,12 +67,14 @@ int Credits::start(){
 
 	Credit_Sprite cs = Credit_Sprite("green", 25);
 
+	//iterates through the slime frames and the text
 	for(int s = 0; s < entries.size(); s++){
 		for(int i = 0; i < cs.getNumFrames(); i++){
 			cs.update(i);
-			window -> clear();
-			window -> draw(cs.getSprite());
+			window -> clear(); //clears the screen
+			window -> draw(cs.getSprite()); //displays the sprite
 		
+			//4th frame is where text needs to be displayed
 			if(i >= 4){
 				for(int j = 0; j < entries[s].size(); j++){
 					sf::Text text;
@@ -70,19 +89,14 @@ int Credits::start(){
 			window -> display();
 
 		}
-		cs.changeColor();
+		cs.changeColor(); //changes slime color
 	}
 
 	return 0;
 }
-
+/*****************************************************************
+This function sets the frame rate limit.
+    *****************************************************************/
 void Credits::end(){
 	window -> setFramerateLimit(0);
 }
-
-
-/*int main(int argc, char** argv){
-	Credits c;
-	
-	return 0;
-}*/
