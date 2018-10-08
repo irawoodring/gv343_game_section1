@@ -46,6 +46,7 @@ void Person::harm(int hp){
 	punch.play();
 }
 
+
 void Person::render(sf::RenderTarget& window) {
 
     if (animationClock.getElapsedTime().asMilliseconds() > ANIMATION_SPEED) {

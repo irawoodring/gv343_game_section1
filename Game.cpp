@@ -1,7 +1,7 @@
 /*
  * Game.cpp
- * Much code taken from SFML tutorials on SFML site.  Basic 
- * flow tutorial at 
+ * Much code taken from SFML tutorials on SFML site.  Basic
+ * flow tutorial at
  * from https://maksimdan.gitbooks.io/sfml-and-gamedevelopement/content/game_class.html
  *
  * You will need to read SFML API and other documentation to understand this code
@@ -16,20 +16,22 @@
 #include <random>
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
+#include "robeguy.hpp"
+#include "zombie.hpp"
+#include "Ghost.hpp"
+
 
 /*
  * Default constructor.  Creates our window and sets up
  * initial state of shared variables.
  */
 Game::Game(){
+	// Creates the window.  We are using the same window for
 
-	// Creates the window.  We are using the same window for 
 	// the intro screen as the game, though this can change.
 	window.create(sf::VideoMode(WIDTH, HEIGHT + 100), "Not on my block.");
 	// when done is true we quit
 	done = false;
-	// Add monsters to the game via a vector of Monsters.
-	monsters.push_back(Monster());
 	// The "standard" game font is loaded here.
 	if(!font.loadFromFile("fonts/Notable-Regular.ttf")){
 		std::cerr << "We should be throwing exceptions here... font can't load." << std::endl;
@@ -68,7 +70,7 @@ int Game::start(){
 	text.setString("(Press Enter to continue)");
 	text.setCharacterSize(24);
 	text.setFillColor(sf::Color::White);
-	text.setPosition(150, 350); 
+	text.setPosition(150, 350);
 
 
 // This is added in by gameOptions group for testing purposes
@@ -85,8 +87,11 @@ int Game::start(){
 	if(!music.openFromFile("music/epic_hero.wav")){
 		return EXIT_FAILURE;
 	}
+	monsters.clear();
+	// Add monsters to the game via a vector of Monsters.
+	monsters.push_back(Monster(20, 20, 100, 50, 1000));
 	gameOptions optionsMenu(window,music);
-//ADDED IN
+
 
 	music.play();
 	while (window.isOpen())
@@ -160,17 +165,18 @@ void Game::run()
 	music.setVolume(50);
 	music.setLoop(true);
 	music.play();
-
+	int frames = 0;
 	while (!done)
 	{
 		processEvents();
-		update();
+		update(frames);
 		render();
+		frames ++;
 	}
 	music.stop();
 }
 
-/* 
+/*
  * All game events such as keypresses are handled
  * here.
  */
@@ -203,7 +209,7 @@ void Game::processEvents()
 					break;
 					default:
 					break;
-				}				
+				}
 			default:
 				break;
 		}
@@ -215,10 +221,8 @@ void Game::processEvents()
  * checking collisions, updating score variables, etc.
  */
 
-void Game::update()
+void Game::update(int frames)
 {
-
-    player.update();
 
     for(auto it = monsters.begin(); it != monsters.end(); ++it){
         if(Collision::BoundingBoxTest(player.getSprite(), it->getSprite())){
@@ -227,7 +231,33 @@ void Game::update()
 			std::random_device rd;
 			std::mt19937 engine(rd());
 			player.updatePosition(distribution(engine), distribution(engine));
+
 		}
+		if (it->dead()){
+		    score += it->getScore();
+		    monsters.erase(it);
+		}
+
+		if (frames % 240 == 0) {
+			it->updatePosition(player.getX(), player.getY());
+		}
+	}
+
+	if(monsters.size() == 0 || frames % 5000 == 0) {
+		std::cout<<monsters.size()<< std::endl;
+        rng = rand() % 3;
+        // Add monsters to the game via a vector of Monsters.
+        rngWidth =rand() % WIDTH;
+        rngHeight = rand()% HEIGHT;
+        if (rng == 0) {
+            monsters.push_back(robeguy(rngWidth, rngHeight, 80, 30, 500));
+        }
+        else if (rng == 1) {
+         		monsters.push_back(Ghost(rngWidth, rngHeight, 100, 20, 300));
+        }
+        else if (rng == 2) {
+           monsters.push_back(zombie(rngWidth, rngHeight, 150, 50, 800));
+        }
 	}
 	if(player.getHealth() <= 0){
 		done = true;

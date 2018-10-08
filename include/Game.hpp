@@ -14,16 +14,17 @@ class Game {
 	private:
 		sf::RenderWindow window;
 		void processEvents();
-		void update();
+		void update(int frames);
 		void render();
 
 		std::vector<Monster> monsters;
 		Person player;
 		bool done;
 		int score;
+		int rng, rngWidth, rngHeight;
 		sf::Text scoreLabel;
 		sf::Text playerHealth;	
-        	sf::Font font;
+		sf::Font font;
 		
 };
 
