@@ -23,7 +23,7 @@ int Credits::start(){
 	std::ifstream inFile;
 	inFile.open("credits.txt");
 	std::string line;
-	std::vector<std::vector<std::string>> entries(100);
+	std::vector<std::vector<std::string>> entries(11);
 	if(!inFile){
 		std::cerr << "Error opening file";
 	}
@@ -43,13 +43,6 @@ int Credits::start(){
 		inFile.close();
 	}
 
-	/*for(int i = 0; i < local; i++){
-		for(int j = 0; j < entries[i].size(); j++){
-				std::cout << entries[i][j] << std::endl;
-		}
-		std::cout << std::endl;
-	}*/
-
 	sf::Font font;
 	if(!font.loadFromFile("fonts/Notable-Regular.ttf")){
 		return EXIT_FAILURE;
@@ -57,24 +50,27 @@ int Credits::start(){
 
 	Credit_Sprite cs = Credit_Sprite("green", 26);
 
-	for(int i = 0; i < cs.getNumFrames(); i++){
-		cs.update(i);
-		window -> clear();
-		window -> draw(cs.getSprite());
+	for(int s = 0; s < entries.size(); s++){
+		for(int i = 0; i < cs.getNumFrames(); i++){
+			cs.update(i);
+			window -> clear();
+			window -> draw(cs.getSprite());
 		
-		if(i >= 4){
-			for(int j = 0; j < entries[0].size(); j++){
-				sf::Text text;
-				text.setFont(font);
-				text.setCharacterSize(25);
-				text.setString(entries[0][j]);
-				text.setFillColor(sf::Color::White);
-				text.setPosition(200, 200 + 30*j);
-				//text.setPosition(50,50);
-				window -> draw(text);
+			if(i >= 4){
+				for(int j = 0; j < entries[s].size(); j++){
+					sf::Text text;
+					text.setFont(font);
+					text.setCharacterSize(25);
+					text.setString(entries[s][j]);
+					text.setFillColor(sf::Color::White);
+					text.setPosition(200, 200 + 30*j);
+					window -> draw(text);
+				}
 			}
+			window -> display();
+
 		}
-		window -> display();
+		cs.changeColor();
 	}
 
 	return 0;

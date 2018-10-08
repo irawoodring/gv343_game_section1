@@ -9,6 +9,12 @@ Credit_Sprite::Credit_Sprite(std::string color, int numFrames){
 	this -> color = color;
 	this -> numFrames = numFrames;
 
+	colors.push_back("green");
+	colors.push_back("red");
+	colors.push_back("purple");
+	colors.push_back("blue");
+	colors.push_back("orange");
+
 	sprite.setPosition(25,0);
 } 
 
@@ -34,4 +40,15 @@ sf::Sprite Credit_Sprite::getSprite(){
 
 int Credit_Sprite::getNumFrames(){
 	return numFrames;
+}
+
+void Credit_Sprite::changeColor(){
+//	int range = 4 - 1;
+//	int num = std::rand() % range;
+	if(currentColor != 5)
+		currentColor++;	
+	else
+		currentColor = 0;
+
+	this -> color = colors[currentColor];
 }

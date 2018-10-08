@@ -12,15 +12,18 @@ class Credit_Sprite{
 		void update(int currentFrame);
 		sf::Sprite getSprite();
 		int getNumFrames();
+		void changeColor();
 	private:
 		std::ostringstream sstream;
 
 		std::string color;
 		std::vector<std::string> frames;
+		std::vector<std::string> colors;
 		std::string fileName;
 		sf::Texture texture;
 		sf::Sprite sprite;
 		int numFrames;
+		int currentColor;
 };
 
 #endif
