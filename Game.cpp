@@ -22,7 +22,7 @@
  * initial state of shared variables.
  */
 Game::Game(){
-	
+
 	// Creates the window.  We are using the same window for 
 	// the intro screen as the game, though this can change.
 	window.create(sf::VideoMode(WIDTH, HEIGHT + 100), "Not on my block.");
@@ -217,8 +217,11 @@ void Game::processEvents()
 
 void Game::update()
 {
-	for(auto it = monsters.begin(); it != monsters.end(); ++it){
-		if(Collision::BoundingBoxTest(player.getSprite(), it->getSprite())){
+
+    player.update();
+
+    for(auto it = monsters.begin(); it != monsters.end(); ++it){
+        if(Collision::BoundingBoxTest(player.getSprite(), it->getSprite())){
 			player.harm(20);
 			std::uniform_int_distribution<int> distribution(0,50);
 			std::random_device rd;
@@ -239,6 +242,7 @@ void Game::render()
 {
 	window.clear();
 	window.draw(player.getSprite());
+    player.render(window);
 	for(auto it = monsters.begin(); it != monsters.end(); ++it){
 		window.draw( it->getSprite() );
 	}
