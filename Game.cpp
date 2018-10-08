@@ -218,28 +218,19 @@ void Game::update(int frames)
 
 	if(monsters.size() == 0 || frames % 5000 == 0) {
 		std::cout<<monsters.size()<< std::endl;
-        rng = rand() % 5;
+        rng = rand() % 3;
         // Add monsters to the game via a vector of Monsters.
         rngWidth =rand() % WIDTH;
         rngHeight = rand()% HEIGHT;
         if (rng == 0) {
-        	//robeguy a = robeguy(4, 4, 80, 30, 500);
-            monsters.push_back(robeguy(4, 4, 80, 30, 500));
+            monsters.push_back(robeguy(rngWidth, rngHeight, 80, 30, 500));
         }
         else if (rng == 1) {
-         		monsters.push_back(Ghost(rngWidth, rngHeight, 80, 30, 500));
+         		monsters.push_back(Ghost(rngWidth, rngHeight, 100, 20, 300));
         }
         else if (rng == 2) {
-           monsters.push_back(zombie(rngWidth, rngHeight, 80, 30, 500));
+           monsters.push_back(zombie(rngWidth, rngHeight, 150, 50, 800));
         }
-        //else if (rng == 3) {
-           // monsters.push_back(placeholder(rngWidth, rngHeight, 80, 30, 500));
-        //}
-        //else if (rng == 4) {
-         //   monsters.push_back(placeholder(rngWidth, rngHeight, 80, 30, 500));
-        //}
-
-
 	}
 	if(player.getHealth() <= 0){
 		done = true;

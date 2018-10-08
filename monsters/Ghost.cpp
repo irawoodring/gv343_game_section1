@@ -18,8 +18,8 @@ class Ghost: public Monster{
         setSprite();
     }
 
-    void robeguy::setSprite(){
-        std::string path = "sprites/Ghost_1.png";
+    void Ghost::setSprite(){
+        std::string path = "sprites/ghost/Ghost_1.png";
         sprite.setTexture(path);
     }
 
