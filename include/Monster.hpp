@@ -15,7 +15,10 @@ class Monster {
 
 	public:
 		Monster();
+		Monster(std::string path);
 		int getHealth();
+		void setHealth(int health);
+		void setAttackPower(int attackPower);
 		void harm(int amount);
 		void updatePosition(int x, int y);
 		sf::Sprite getSprite();
